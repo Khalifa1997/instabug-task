@@ -1,22 +1,36 @@
 <template>
   <div class="slideshow-container">
     <div v-if="slide == 1" class="fade">
-      <img src="../assets/SlideOne.svg" style="width: 100%" />
+      <img
+        src="../assets/SlideOne.svg"
+        style="margin: 20 auto; max-height: 400px; padding-top: 20"
+      />
+      <p class="slide-text">Accelerate Your Entire Mobile Team Workflow</p>
     </div>
 
     <div v-else-if="slide == 2" class="fade">
-      <img src="../assets/SlideTwo.svg" style="width: 100%" />
+      <img
+        src="../assets/SlideTwo.svg"
+        style="margin: 20 auto; max-height: 400px; padding-top: 20"
+      />
+      <p class="slide-text">
+        The Most Comprehensive Bug Reporting Tool for Mobile Apps
+      </p>
     </div>
 
     <div v-else class="fade">
-      <img src="../assets/SlideThree.svg" style="width: 100%" />
+      <img
+        src="../assets/SlideThree.svg"
+        style="margin: 20 auto; max-height: 400px; padding-top: 20"
+      />
+      <p class="slide-text">Secure Crash Reporting with Real-Time Alerts</p>
     </div>
     <div class="dot-container">
       <span
         v-for="i in 3"
         :key="i"
         class="dot"
-        :class="slide == i ? 'dot-selected' : null"
+        :class="slide == i ? `dot-selected` : null"
         @click="setSlide(i)"
       ></span>
     </div>
@@ -51,6 +65,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-@import "../assets/css/SlideShow.scss";
-</style>
+<style src="../assets/css/SlideShow.css"></style>
