@@ -54,12 +54,15 @@
         placeholder="8+ Characters"
         class="form-input"
         v-model="password"
-        :class="passwordClicked ? 'form-input-selected' : null"
-        @click="
-          passwordClicked = true;
-          emailClicked = false;
-        "
+        :class="[
+          passwordClicked ? `form-input-selected` : null,
+          errorMessage2.length > 0 ? 'form-input-error' : null,
+        ]"
+        @click="passwordClicked = true"
       />
+      <p v-if="errorMessage2.length > 0" class="form-input-error-text">
+        {{ this.errorMessage2 }}
+      </p>
       <button type="submit" class="form-button">Log in</button>
       <div class="form-passwordContainer">
         <p class="form-noAccount">Don't have an account?</p>
@@ -92,15 +95,19 @@ import github from "../assets/git.png";
 import google from "../assets/google.svg";
 
 import microsoft from "../assets/microsoft.png";
-function ValidateEmail(inputText) {
+const ValidateEmail = (inputText) => {
   //eslint-disable-next-line
-  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   if (inputText.match(mailformat)) {
     return true;
   } else {
     return false;
   }
-}
+};
+const isUpperCase = (string) => /^[A-Z]$/.test(string);
+const hasNumber = (myString) => {
+  return /\d/.test(myString);
+};
 export default {
   setup() {
     return {
@@ -118,6 +125,27 @@ export default {
   methods: {
     emailWasClicked() {
       this.emailClicked = true;
+    },
+    ValidatePassword(inputText) {
+      if (inputText.length < 6) {
+        this.errorMessage2 = "Password Must be atleast 6 characters";
+        return false;
+      }
+      const firstPart = this.email.split("@")[0];
+      if (inputText.includes(firstPart)) {
+        this.errorMessage2 =
+          "Password Can not contain the first word in your Email";
+        return false;
+      }
+      if (!isUpperCase(inputText)) {
+        this.errorMessage2 = "Password Must contain an Uppercase Letter";
+        return false;
+      }
+      if (!hasNumber(inputText)) {
+        this.errorMessage2 = "Password Must contain a number";
+        return false;
+      }
+      return true;
     },
   },
   components: {
@@ -141,6 +169,13 @@ export default {
         this.errorMessage1 = "Enter a valid Email Address.";
       } else {
         this.errorMessage1 = "";
+      }
+    },
+    password(newValue) {
+      if (!this.ValidatePassword(newValue)) {
+        this.passwordClicked = false;
+      } else {
+        this.errorMessage2 = "";
       }
     },
   },
