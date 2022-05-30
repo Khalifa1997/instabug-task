@@ -1,8 +1,8 @@
 $button-active-blue: #1669f2;
 .social-btn {
-  width: 184px;
+  min-width: 184px;
   height: 38px;
-
+  width: 100%;
   border-radius: 2px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
 

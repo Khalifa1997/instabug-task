@@ -213,11 +213,11 @@
           align-items: center;
         "
       >
-        <img :src="lyft" style="height: 30px" />
-        <img :src="buzzfeed" style="height: 22px; margin-left: 24px" />
-        <img :src="asana" style="height: 25px; margin-left: 24px" />
-        <img :src="oneplus" style="height: 30px; margin-left: 24px" />
-        <img :src="houseparty" style="height: 25px; margin-left: 24px" />
+        <img :src="lyft" style="height: 26px" />
+        <img :src="buzzfeed" style="height: 26px; margin-left: 24px" />
+        <img :src="asana" style="height: 26px; margin-left: 24px" />
+        <img :src="oneplus" style="height: 26px; margin-left: 24px" />
+        <img :src="houseparty" style="height: 26px; margin-left: 24px" />
       </div>
     </div>
   </div>
