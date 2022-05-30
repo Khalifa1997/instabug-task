@@ -39,7 +39,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "CarouselSlider",
 
   data() {
     return {

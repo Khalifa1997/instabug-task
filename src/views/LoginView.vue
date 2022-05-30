@@ -1,8 +1,25 @@
 <template>
   <div class="container">
-    <HelloWorld />
-    <div>
-      <img :src="instabug" />
+    <Carousel />
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 30px;
+      "
+    >
+      <img :src="instabug" style="width: 48px; height: 48px" />
+      <h2
+        style="
+          color: #445065;
+          font-weight: 400;
+          font-family: 'ProximaNova', Helvetica, Arial, sans-serif;
+          line-height: 1.4;
+        "
+      >
+        Log in to Instabug
+      </h2>
       <SocialButton />
       <SocialButton
         :url="github"
@@ -37,13 +54,12 @@
           >OR</span
         >
       </h2>
-      <p>this is some content other</p>
     </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from "@/components/HelloWorld.vue";
+import Carousel from "@/components/Carousel.vue";
 import SocialButton from "@/components/SocialButton.vue";
 import instabug from "../assets/instabug.svg";
 import github from "../assets/git.png";
@@ -52,7 +68,7 @@ import microsoft from "../assets/microsoft.png";
 export default {
   name: "LoginView",
   components: {
-    HelloWorld,
+    Carousel,
     SocialButton,
   },
   data() {
