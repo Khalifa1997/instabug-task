@@ -5,14 +5,7 @@
     :style="{ 'background-color': color }"
   >
     <div class="social-icon-container" :style="{ 'background-color': bgColor }">
-      <img
-        class="social-icon"
-        :src="
-          url
-            ? url
-            : `https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg`
-        "
-      />
+      <img class="social-icon" :src="url" />
     </div>
     <div class="btn-text" :style="{ color: textColor }">
       <b>{{ this.text }}</b>
@@ -28,7 +21,8 @@ export default {
   props: {
     url: {
       type: String,
-      default: "",
+      default:
+        "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg",
     },
     color: {
       type: String,
