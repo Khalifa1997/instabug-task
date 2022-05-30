@@ -214,6 +214,10 @@
         "
       >
         <img :src="lyft" style="height: 30px" />
+        <img :src="buzzfeed" style="height: 22px; margin-left: 24px" />
+        <img :src="asana" style="height: 25px; margin-left: 24px" />
+        <img :src="oneplus" style="height: 30px; margin-left: 24px" />
+        <img :src="houseparty" style="height: 25px; margin-left: 24px" />
       </div>
     </div>
   </div>
@@ -223,7 +227,10 @@
 import SocialButton from "@/components/SocialButton.vue";
 import instabug from "../assets/instabug.svg";
 import lyft from "../assets/lyft.svg";
-
+import buzzfeed from "../assets/BuzzFeed.svg";
+import oneplus from "../assets/oneplus.svg";
+import asana from "../assets/asana.svg";
+import houseparty from "../assets/houseparty.svg";
 import github from "../assets/git.png";
 import google from "../assets/google.svg";
 
@@ -234,8 +241,12 @@ export default {
       github,
       microsoft,
       instabug,
+      asana,
       lyft,
       google,
+      buzzfeed,
+      houseparty,
+      oneplus,
     };
   },
   components: {
