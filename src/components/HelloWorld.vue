@@ -1,130 +1,113 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br />
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener"
-        >vue-cli documentation</a
-      >.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
-          target="_blank"
-          rel="noopener"
-          >babel</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router"
-          target="_blank"
-          rel="noopener"
-          >router</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex"
-          target="_blank"
-          rel="noopener"
-          >vuex</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
-          target="_blank"
-          rel="noopener"
-          >eslint</a
-        >
-      </li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li>
-        <a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a>
-      </li>
-      <li>
-        <a href="https://forum.vuejs.org" target="_blank" rel="noopener"
-          >Forum</a
-        >
-      </li>
-      <li>
-        <a href="https://chat.vuejs.org" target="_blank" rel="noopener"
-          >Community Chat</a
-        >
-      </li>
-      <li>
-        <a href="https://twitter.com/vuejs" target="_blank" rel="noopener"
-          >Twitter</a
-        >
-      </li>
-      <li>
-        <a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a>
-      </li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li>
-        <a href="https://router.vuejs.org" target="_blank" rel="noopener"
-          >vue-router</a
-        >
-      </li>
-      <li>
-        <a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-devtools#vue-devtools"
-          target="_blank"
-          rel="noopener"
-          >vue-devtools</a
-        >
-      </li>
-      <li>
-        <a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener"
-          >vue-loader</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-          rel="noopener"
-          >awesome-vue</a
-        >
-      </li>
-    </ul>
+  <div class="slideshow-container">
+    <div v-if="slide == 1" class="fade">
+      <img src="../assets/SlideOne.svg" style="width: 100%" />
+    </div>
+
+    <div v-else-if="slide == 2" class="fade">
+      <img src="../assets/SlideTwo.svg" style="width: 100%" />
+    </div>
+
+    <div v-else class="fade">
+      <img src="../assets/SlideThree.svg" style="width: 100%" />
+    </div>
+    <div class="dot-container">
+      <span
+        v-for="i in 3"
+        :key="i"
+        class="dot"
+        :class="slide == i ? 'dot-selected' : null"
+        @click="setSlide(i)"
+      ></span>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "HelloWorld",
-  props: {
-    msg: String,
+
+  data() {
+    return {
+      slide: 1,
+      users: [
+        { email: "mohamed@instabug.com", password: "A12345678" },
+        { email: "mohamed1@instabug.com", password: "A12345678" },
+        { email: "mohamed2@instabug.com", password: "A12345678" },
+        { email: "mohamed3@instabug.com", password: "A12345678" },
+        { email: "mohamed4@instabug.com", password: "A12345678" },
+        { email: "mohamed5@instabug.com", password: "A12345678" },
+        { email: "mohamed6@instabug.com", password: "A12345678" },
+        { email: "mohamed7@instabug.com", password: "A12345678" },
+      ],
+    };
+  },
+  methods: {
+    setSlide(n) {
+      this.slide = n;
+    },
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
+* {
+  box-sizing: border-box;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+/* Slideshow container */
+.slideshow-container {
+  width: 50%;
+  position: relative;
 }
-li {
+
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  /*   position: absolute;
+  bottom: 8px;
+  width: 100%; */
+  text-align: center;
+}
+
+.dot-container {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+.dot {
+  cursor: pointer;
+  height: 10px;
+  width: 10px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
   display: inline-block;
-  margin: 0 10px;
+  transition: background-color 0.6s ease;
+  &-selected {
+    background-color: #717171;
+  }
+  &:hover {
+    background-color: #717171;
+  }
 }
-a {
-  color: #42b983;
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style>
