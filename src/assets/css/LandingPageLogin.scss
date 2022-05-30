@@ -67,6 +67,12 @@
     &-error {
       border-color: #f24220;
       box-shadow: none;
+      &-text {
+        color: #f24220;
+        margin-top: 0.25rem;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 0.75rem;
+      }
     }
   }
   &-passwordContainer {

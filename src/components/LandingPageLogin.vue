@@ -42,6 +42,9 @@
         ]"
         @click="emailWasClicked"
       />
+      <p v-if="errorMessage1.length > 0" class="form-input-error-text">
+        {{ this.errorMessage1 }}
+      </p>
       <div class="form-passwordContainer">
         <label class="form-label">Password</label>
         <p class="forgotPassword-text">Forgot Password?</p>
