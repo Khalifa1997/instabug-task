@@ -1,17 +1,33 @@
 import { createStore } from "vuex";
+import VuexPersistence from "vuex-persist";
+
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage,
+});
 
 export default createStore({
   state() {
     return {
       email: "",
+      authenticated: false,
     };
   },
   getters: {},
   mutations: {
-    setEmail(email) {
-      this.state.email = email;
+    setEmail(state, email) {
+      state.email = email;
+      state.authenticated = true;
+    },
+    logout(state) {
+      state.email = "";
+      state.authenticated = false;
     },
   },
-  actions: {},
+  actions: {
+    setEmailAction(context, email) {
+      context.commit("setEmail", email);
+    },
+  },
+  plugins: [vuexLocal.plugin],
   modules: {},
 });

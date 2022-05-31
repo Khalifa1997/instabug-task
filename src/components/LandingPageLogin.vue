@@ -110,6 +110,7 @@ import asana from "../assets/asana.svg";
 import houseparty from "../assets/houseparty.svg";
 import github from "../assets/git.png";
 import google from "../assets/google.svg";
+import { mapActions } from "vuex";
 
 import microsoft from "../assets/microsoft.png";
 const ValidateEmail = (inputText) => {
@@ -143,6 +144,9 @@ export default {
     emailWasClicked() {
       this.emailClicked = true;
     },
+    ...mapActions({
+      setEmail: "setEmailAction",
+    }),
     async submit() {
       if (this.errorMessage1.length + this.errorMessage2.length == 0) {
         for (let index = 0; index < this.users.length; index++) {
@@ -151,9 +155,8 @@ export default {
             this.password == this.users[index].password
           ) {
             this.AuthError = false;
-            await this.$store.commit("setEmail", this.email);
-
-            return;
+            await this.setEmail(this.email);
+            await this.$router.push("/welcome");
           }
         }
         this.AuthError = true;
