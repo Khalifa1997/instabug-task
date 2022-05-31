@@ -38,6 +38,7 @@
       <label class="form-label" style="margin-bottom: 8px">Work Email</label>
       <input
         type="email"
+        name="email"
         placeholder="you@company.com"
         class="form-input"
         v-model="email"
@@ -142,7 +143,7 @@ export default {
     emailWasClicked() {
       this.emailClicked = true;
     },
-    submit() {
+    async submit() {
       if (this.errorMessage1.length + this.errorMessage2.length == 0) {
         for (let index = 0; index < this.users.length; index++) {
           if (
@@ -150,7 +151,8 @@ export default {
             this.password == this.users[index].password
           ) {
             this.AuthError = false;
-            alert("Nice");
+            await this.$store.commit("setEmail", this.email);
+
             return;
           }
         }
@@ -206,7 +208,6 @@ export default {
   },
   watch: {
     email(newValue) {
-      console.log(newValue);
       if (!ValidateEmail(newValue)) {
         this.emailClicked = false;
         this.errorMessage1 = "Enter a valid Email Address.";
