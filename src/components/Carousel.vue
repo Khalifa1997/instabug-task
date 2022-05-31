@@ -1,6 +1,6 @@
 <template>
   <div class="slideshow-container">
-    <div v-if="slide == 1" class="fade">
+    <div v-if="slide == 0" class="fade">
       <img
         src="../assets/SlideOne.svg"
         style="margin: 20 auto; max-height: 400px; padding-top: 20"
@@ -8,7 +8,7 @@
       <p class="slide-text">Accelerate Your Entire Mobile Team Workflow</p>
     </div>
 
-    <div v-else-if="slide == 2" class="fade">
+    <div v-else-if="slide == 1" class="fade">
       <img
         src="../assets/SlideTwo.svg"
         style="margin: 20 auto; max-height: 400px; padding-top: 20"
@@ -30,8 +30,8 @@
         v-for="i in 3"
         :key="i"
         class="dot"
-        :class="slide == i ? `dot-selected` : null"
-        @click="setSlide(i)"
+        :class="slide == i - 1 ? `dot-selected` : null"
+        @click="setSlide(i - 1)"
       ></span>
     </div>
   </div>
@@ -60,6 +60,14 @@ export default {
     setSlide(n) {
       this.slide = n;
     },
+    interval() {
+      setInterval(() => {
+        this.setSlide((this.slide + 1) % 3);
+      }, 5000);
+    },
+  },
+  mounted() {
+    this.interval();
   },
 };
 </script>

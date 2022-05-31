@@ -174,7 +174,7 @@ export default {
       passwordClicked: false,
       errorMessage1: "",
       errorMessage2: "",
-      AuthError: true,
+      AuthError: false,
     };
   },
   watch: {
