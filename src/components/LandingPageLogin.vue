@@ -149,16 +149,20 @@ export default {
     }),
     async submit() {
       if (this.errorMessage1.length + this.errorMessage2.length == 0) {
-        for (let index = 0; index < this.users.length; index++) {
+        const userList = JSON.parse(JSON.stringify(this.users));
+        for (let index = 0; index < userList.length; index++) {
           if (
-            this.email == this.users[index].email &&
-            this.password == this.users[index].password
+            this.email == userList[index].email &&
+            this.password == userList[index].password
           ) {
             this.AuthError = false;
-            await this.setEmail(this.email);
-            await this.$router.push("/welcome");
+            await this.$store.dispatch("setEmailAction", this.email);
+
+            return;
           }
         }
+
+        console.log(this.email, this.password, userList);
         this.AuthError = true;
       }
     },

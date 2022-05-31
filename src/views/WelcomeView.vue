@@ -1,15 +1,19 @@
 <template>
   <div class="welcome">
     <h1 class="welcome-text">Hello {{ this.email }}</h1>
-    <button class="logout" @click.prevent="$store.commit('logout')">
-      Log out
-    </button>
+    <button class="logout" @click.prevent="logout">Log out</button>
   </div>
 </template>
 
 <script>
 export default {
   name: "WelcomeView",
+  methods: {
+    async logout() {
+      await this.$store.commit("logout");
+      await this.$router.push("/welcome");
+    },
+  },
   computed: {
     email() {
       return this.$store.state.email;
