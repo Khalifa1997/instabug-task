@@ -26,8 +26,11 @@ export default createStore({
   },
   actions: {
     async setEmailAction(context, email) {
-      await localStorage.clear();
-      context.commit("setEmail", email);
+      return new Promise((resolve) => {
+        localStorage.clear();
+        context.commit("setEmail", email);
+        resolve();
+      });
     },
   },
   plugins: [vuexLocal.plugin],

@@ -13,24 +13,27 @@ const routes = [
     name: "welcome",
     component: WelcomeView,
   },
+  {
+    path: "/",
+    redirect: "/welcome",
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
 });
-router.beforeEach((to, from, next) => {
-  let isAuth = false;
-  const str = JSON.parse(JSON.stringify(store.state));
-  if (str && str.length > 0) {
-    isAuth = str[0].authenticated;
-  }
+router.beforeEach(async (to, from, next) => {
+  const str = await JSON.parse(JSON.stringify(store.state));
+
   const routes = ["welcome", "login"];
   if (routes.includes(to.name)) {
-    if (to.name == "Welcome" && !isAuth) return next({ path: "/login" });
-    if (to.name == "Login" && isAuth) return;
+    if (to.name == "welcome" && !str.authenticated)
+      return next({ path: "/login" });
   } else {
-    return next({ path: "/login" });
+    if (!str.authenticated) return next({ path: "/login" });
+
+    return next({ path: "/welcome" });
   }
   return next();
 });

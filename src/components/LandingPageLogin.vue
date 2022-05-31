@@ -60,6 +60,7 @@
         placeholder="8+ Characters"
         class="form-input"
         v-model="password"
+        @keydown.enter.prevent="submit"
         :class="[
           passwordClicked ? `form-input-selected` : null,
           errorMessage2.length > 0 ? 'form-input-error' : null,
@@ -126,6 +127,17 @@ const isUpperCase = (str) => /[A-Z]/.test(str);
 const hasNumber = (myString) => {
   return /\d/.test(myString);
 };
+const users = [
+  { email: "mohamed@instabug.com", password: "A12345678" },
+  { email: "test@test.com", password: "Ahmed1233" },
+  { email: "mohamed1@instabug.com", password: "A12345678" },
+  { email: "mohamed2@instabug.com", password: "A12345678" },
+  { email: "mohamed3@instabug.com", password: "A12345678" },
+  { email: "mohamed4@instabug.com", password: "A12345678" },
+  { email: "mohamed5@instabug.com", password: "A12345678" },
+  { email: "mohamed6@instabug.com", password: "A12345678" },
+  { email: "mohamed7@instabug.com", password: "A12345678" },
+];
 export default {
   setup() {
     return {
@@ -149,19 +161,24 @@ export default {
     }),
     async submit() {
       if (this.errorMessage1.length + this.errorMessage2.length == 0) {
-        for (let index = 0; index < this.users.length; index++) {
-          if (
-            this.email == this.users[index].email &&
-            this.password == this.users[index].password
-          ) {
-            this.AuthError = false;
-            await this.setEmail(this.email);
-            await this.$router.push("/welcome");
-          }
+        const found = users.filter(
+          (value) =>
+            value.email.toLowerCase() == this.email.toLowerCase() &&
+            value.password == this.password
+        );
+        console.log(found);
+        if (found.length > 0) {
+          this.AuthError = false;
+          this.$store.dispatch("setEmailAction", this.email);
+          this.$router.push("/welcome");
+
+          return;
         }
-        this.AuthError = true;
       }
+
+      this.AuthError = true;
     },
+
     ValidatePassword(inputText) {
       if (inputText.length < 6) {
         this.errorMessage2 = "Password Must be atleast 6 characters";
@@ -196,17 +213,6 @@ export default {
       errorMessage1: "",
       errorMessage2: "",
       AuthError: false,
-      users: [
-        { email: "mohamed@instabug.com", password: "A12345678" },
-        { email: "test@test.com", password: "Ahmed1233" },
-        { email: "mohamed1@instabug.com", password: "A12345678" },
-        { email: "mohamed2@instabug.com", password: "A12345678" },
-        { email: "mohamed3@instabug.com", password: "A12345678" },
-        { email: "mohamed4@instabug.com", password: "A12345678" },
-        { email: "mohamed5@instabug.com", password: "A12345678" },
-        { email: "mohamed6@instabug.com", password: "A12345678" },
-        { email: "mohamed7@instabug.com", password: "A12345678" },
-      ],
     };
   },
   watch: {
