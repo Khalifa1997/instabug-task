@@ -19,12 +19,14 @@ export default createStore({
       state.authenticated = true;
     },
     logout(state) {
+      localStorage.clear();
       state.email = "";
       state.authenticated = false;
     },
   },
   actions: {
-    setEmailAction(context, email) {
+    async setEmailAction(context, email) {
+      await localStorage.clear();
       context.commit("setEmail", email);
     },
   },

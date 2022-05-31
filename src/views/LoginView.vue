@@ -15,7 +15,6 @@ export default {
     Carousel,
     LandingPageLogin,
   },
-  data() {},
 };
 </script>
 <style lang="scss" src="../assets/css/LoginView.scss">

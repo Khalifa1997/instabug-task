@@ -1,15 +1,22 @@
 <template>
   <div class="welcome">
-    <h1 class="welcome-text">Hello {{ this.email }}</h1>
-    <button class="logout" @click.prevent="$store.commit('logout')">
-      Log out
-    </button>
+    <h1 class="welcome-text">
+      Hello <br />
+      {{ this.email }}
+    </h1>
+    <button class="logout" @click.prevent="logout">Log out</button>
   </div>
 </template>
 
 <script>
 export default {
   name: "WelcomeView",
+  methods: {
+    async logout() {
+      await this.$store.commit("logout");
+      await this.$router.push("/login");
+    },
+  },
   computed: {
     email() {
       return this.$store.state.email;
@@ -37,11 +44,12 @@ export default {
   top: -10px;
   left: -30px;
   &-text {
+    display: inline-block;
     font-family: sans-serif;
     text-align: center;
     align-self: center;
     background-color: wheat;
-    width: 300px;
+
     height: 100px;
     font-size: 35px;
     padding: 15px;
