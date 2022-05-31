@@ -76,6 +76,7 @@
             ? 'form-button-info'
             : null
         "
+        @click.prevent="submit"
       >
         Log in
       </button>
@@ -141,6 +142,21 @@ export default {
     emailWasClicked() {
       this.emailClicked = true;
     },
+    submit() {
+      if (this.errorMessage1.length + this.errorMessage2.length == 0) {
+        for (let index = 0; index < this.users.length; index++) {
+          if (
+            this.email == this.users[index].email &&
+            this.password == this.users[index].password
+          ) {
+            this.AuthError = false;
+            alert("Nice");
+            return;
+          }
+        }
+        this.AuthError = true;
+      }
+    },
     ValidatePassword(inputText) {
       if (inputText.length < 6) {
         this.errorMessage2 = "Password Must be atleast 6 characters";
@@ -175,6 +191,17 @@ export default {
       errorMessage1: "",
       errorMessage2: "",
       AuthError: false,
+      users: [
+        { email: "mohamed@instabug.com", password: "A12345678" },
+        { email: "test@test.com", password: "Ahmed1233" },
+        { email: "mohamed1@instabug.com", password: "A12345678" },
+        { email: "mohamed2@instabug.com", password: "A12345678" },
+        { email: "mohamed3@instabug.com", password: "A12345678" },
+        { email: "mohamed4@instabug.com", password: "A12345678" },
+        { email: "mohamed5@instabug.com", password: "A12345678" },
+        { email: "mohamed6@instabug.com", password: "A12345678" },
+        { email: "mohamed7@instabug.com", password: "A12345678" },
+      ],
     };
   },
   watch: {
