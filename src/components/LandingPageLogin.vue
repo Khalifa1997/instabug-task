@@ -30,6 +30,11 @@
       <span class="divider-text">OR</span>
     </h2>
     <div class="form-container">
+      <div v-if="AuthError" class="form-alert-error">
+        <p class="form-alert-error-text">
+          Your email and/or password are incorrect
+        </p>
+      </div>
       <label class="form-label" style="margin-bottom: 8px">Work Email</label>
       <input
         type="email"
@@ -63,7 +68,17 @@
       <p v-if="errorMessage2.length > 0" class="form-input-error-text">
         {{ this.errorMessage2 }}
       </p>
-      <button type="submit" class="form-button">Log in</button>
+      <button
+        type="submit"
+        class="form-button"
+        :class="
+          errorMessage1.length + errorMessage2.length == 0
+            ? 'form-button-info'
+            : null
+        "
+      >
+        Log in
+      </button>
       <div class="form-passwordContainer">
         <p class="form-noAccount">Don't have an account?</p>
         <p style="margin-left: 2px" class="form-sso">Sign up</p>
@@ -104,7 +119,7 @@ const ValidateEmail = (inputText) => {
     return false;
   }
 };
-const isUpperCase = (string) => /^[A-Z]$/.test(string);
+const isUpperCase = (str) => /[A-Z]/.test(str);
 const hasNumber = (myString) => {
   return /\d/.test(myString);
 };
@@ -131,8 +146,8 @@ export default {
         this.errorMessage2 = "Password Must be atleast 6 characters";
         return false;
       }
-      const firstPart = this.email.split("@")[0];
-      if (inputText.includes(firstPart)) {
+      const firstPart = this.email.split("@")[0].toLowerCase();
+      if (inputText.toLowerCase().includes(firstPart)) {
         this.errorMessage2 =
           "Password Can not contain the first word in your Email";
         return false;
@@ -159,6 +174,7 @@ export default {
       passwordClicked: false,
       errorMessage1: "",
       errorMessage2: "",
+      AuthError: true,
     };
   },
   watch: {
