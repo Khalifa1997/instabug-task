@@ -129,7 +129,6 @@ const hasNumber = (myString) => {
 };
 const users = [
   { email: "mohamed@instabug.com", password: "A12345678" },
-  { email: "test@test.com", password: "Ahmed1233" },
   { email: "mohamed1@instabug.com", password: "A12345678" },
   { email: "mohamed2@instabug.com", password: "A12345678" },
   { email: "mohamed3@instabug.com", password: "A12345678" },
@@ -166,7 +165,7 @@ export default {
             value.email.toLowerCase() == this.email.toLowerCase() &&
             value.password == this.password
         );
-        console.log(found);
+
         if (found.length > 0) {
           this.AuthError = false;
           this.$store.dispatch("setEmailAction", this.email);
