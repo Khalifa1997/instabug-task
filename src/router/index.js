@@ -1,5 +1,9 @@
 import store from "@/store";
-import { createRouter, createWebHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHashHistory,
+  //createWebHistory,
+} from "vue-router";
 import LoginView from "../views/LoginView.vue";
 import WelcomeView from "../views/WelcomeView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
@@ -36,7 +40,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 router.beforeEach(async (to, from, next) => {
