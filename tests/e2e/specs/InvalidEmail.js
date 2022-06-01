@@ -1,7 +1,7 @@
 // https://docs.cypress.io/api/table-of-contents
 
-describe("Typing wrong Password", () => {
-  it("Visits the app root url", () => {
+describe("Typing an invalid email address", () => {
+  it("Show an error", () => {
     cy.visit("/");
     cy.get("[type='email']").type("dddd");
     cy.get(".form-input-error-text").should(

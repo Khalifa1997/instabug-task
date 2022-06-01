@@ -1,7 +1,7 @@
 // https://docs.cypress.io/api/table-of-contents
 
 describe("Typing wrong Password", () => {
-  it("Visits the app root url", () => {
+  it("Shows an alert message", () => {
     cy.visit("/");
     cy.get("[type='email']").type("mohamed@instabug.com");
     cy.get("[type='password']").type("A123456789");
