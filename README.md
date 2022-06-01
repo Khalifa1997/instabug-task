@@ -1,24 +1,5 @@
-# instabug-task
+# Instabug-task
 
-## Project setup
-```
-npm install
-```
+Live Preview of the [Task](hhttps://harmonious-scone-743931.netlify.app/#/login).
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Made with Vue, VueX, Vue-router, SASS and tested with CyPress
